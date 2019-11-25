@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.DTO;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
@@ -7,23 +8,30 @@ namespace Infrastructure
 {
     public class UserTable
     {
-        public DataTable Get()
+        public IEnumerable<UserDTO> Get()
         {
             // SQL TODO
             throw new NotImplementedException();
         }
 
-        public DataTable Get(int id)
+        public UserDTO Get(int id)
         {
-            throw new NotImplementedException();
+            // CALL SQL
+            var data = new DataTable();
+            return Map(data);
         }
 
-        public bool Create(string name, int age)
+        public bool Create(UserDTO user)
         {
             throw new NotImplementedException();
         }
 
         public bool Delte(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private UserDTO Map( DataTable data)
         {
             throw new NotImplementedException();
         }

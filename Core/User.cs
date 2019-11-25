@@ -1,4 +1,5 @@
 ﻿using Infrastructure;
+using Infrastructure.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,15 +21,16 @@ namespace Core
         public static User Get(int id)
         {
             var userTable = new UserTable();
-            var data = userTable.Get(id);
-            return Map(data);
+            var userDTO = userTable.Get(id);
+            return Map(userDTO);
         }
 
         public void Save()
         {
             if(Id == -1)
             {
-                // INSERT
+                var userTable = new UserTable();
+                userTable.Create(Map(this));
                 return;
             }
 
@@ -40,9 +42,20 @@ namespace Core
             throw new NotImplementedException();
         }
 
-        private static User Map(DataTable data)
+        private static User Map(UserDTO userDTO)
         {
-            return new User();
+            return new User
+            {
+                Name = userDTO.Name
+            };
+        }
+
+        private static UserDTO Map(User user)
+        {
+            return new UserDTO
+            {
+                Name = user.Name
+            };
         }
     }
 }
